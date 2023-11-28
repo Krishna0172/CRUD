@@ -1,13 +1,20 @@
-const client = require('./connection.js');
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require("body-parser");
-const app = express();
-const insertQuery = {
-  text: 'INSERT INTO users(id, name, age, dep) VALUES($1, $2, $3, $4)',
-  // values: [user.id, user.name, user.age, user.dep]
+
+const getAllUsersQuery = 'SELECT * FROM users ORDER BY id ASC';
+
+const insertUserQuery = (user) => {
+  return `INSERT INTO users(id, name, age, dep) VALUES (${user.id}, '${user.name}', '${user.age}', '${user.dep}')`;
 };
 
+const getUserByIdQuery = (id) => `SELECT * FROM users WHERE id=${id}`;
 
-module.exports={insertQuery};
-console.log(client)
+const updateUserQuery = (user) => `UPDATE users SET name='${user.name}', age ='${user.age}', dep ='${user.dep}' WHERE id=${user.id}`;
+
+const deleteUserQuery = (id) => `DELETE FROM users WHERE id=${id}`;
+
+module.exports = {
+  getAllUsersQuery,
+  insertUserQuery,
+  getUserByIdQuery,
+  updateUserQuery,
+  deleteUserQuery,
+};
