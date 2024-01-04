@@ -8,7 +8,7 @@ const { client } = require('./config/connection');
 app.use(express.json());
 app.use(cors());
 
-// Connect to the database once
+
 client.connect();
 
 app.listen(port, () => {
